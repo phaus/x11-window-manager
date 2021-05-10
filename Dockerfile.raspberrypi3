@@ -16,7 +16,7 @@ RUN apt-get update && \
       libgles2 \
       lxterminal \
       matchbox-keyboard && \
-    rm -rf /var/lib/apt/lists/* && \
+    rm -rf /var/lib/apt/lists/* 
 
 # disable lxpolkit popup warning
 RUN mv /usr/bin/lxpolkit /usr/bin/lxpolkit.bak
