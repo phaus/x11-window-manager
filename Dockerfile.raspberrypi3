@@ -11,7 +11,6 @@ RUN apt-get update && \
       gtk2-engines-clearlookspix \
       x11-utils \
       x11vnc \
-      chromium \
       rpi-chromium-mods \
       chromium-browser \
       libgles2 \
