@@ -13,6 +13,7 @@ RUN apt-get update && \
       x11vnc \
       chromium \
       rpi-chromium-mods \
+      chromium-browser \
       libgles2 \
       lxterminal \
       matchbox-keyboard && \
