@@ -1,11 +1,22 @@
 FROM balenalib/raspberrypi3:buster
 
+
 # Install desktop environment
-RUN install_packages xserver-xorg-core \
-    xinit lxsession desktop-file-utils \
-    raspberrypi-ui-mods rpd-icons \
-    gtk2-engines-clearlookspix \
-    matchbox-keyboard
+RUN apt-get update && \
+    apt-get upgrade -y && \
+    apt-get install --no-install-recommends -y \
+      xserver-xorg-core \
+      xinit lxsession desktop-file-utils \
+      raspberrypi-ui-mods rpd-icons \
+      gtk2-engines-clearlookspix \
+      x11-utils \
+      x11vnc \
+      chromium \
+      rpi-chromium-mods \
+      libgles2 \
+      lxterminal \
+      matchbox-keyboard && \
+    rm -rf /var/lib/apt/lists/* && \
 
 # disable lxpolkit popup warning
 RUN mv /usr/bin/lxpolkit /usr/bin/lxpolkit.bak
@@ -20,8 +31,10 @@ WORKDIR /usr/src/app
 COPY start.sh start.sh
 
 # Adding things to autostart will cause them to be launchd automatically on starup
-# COPY autostart /etc/xdg/lxsession/LXDE-pi/autostart
+COPY autostart /etc/xdg/lxsession/LXDE-pi/autostart
 
 ENV UDEV=1
+
+RUN useradd -m pi -G audio,input,video,tty
 
 CMD ["bash", "start.sh"]
